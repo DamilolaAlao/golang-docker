@@ -26,12 +26,12 @@ COPY go.mod .
 COPY go.sum .
 RUN go mod download
 COPY . .
-RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o /bin/main .
+RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o main .
 
 FROM alpine:latest
 RUN addgroup -S main && adduser -S main -G main
 USER main
-WORKDIR /home/main
-COPY --from=builder /bin/main ./
+# WORKDIR /home/main
+COPY --from=builder /main ./
 EXPOSE 3000
 ENTRYPOINT ["./main"]
