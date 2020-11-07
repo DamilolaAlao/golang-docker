@@ -12,7 +12,7 @@ WORKDIR /app
 # RUN go mod download
 # COPY . .
 ## We want to build our application's binary executable
-RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o main
+RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o main /app
 
 ## the lightweight scratch image we'll
 ## run our application within
