@@ -5,12 +5,12 @@ FROM golang:1.11.1 AS builder
 ## We create an /app directory in which
 ## we'll put all of our project code
 RUN mkdir /app
-ADD . /app
-WORKDIR /app
-# COPY go.mod .
-# COPY go.sum .
-# RUN go mod download
-# COPY . .
+# ADD . /app
+# WORKDIR /app
+COPY go.mod /app
+COPY go.sum /app
+RUN go mod download
+COPY . /app
 ## We want to build our application's binary executable
 RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o main /app
 
