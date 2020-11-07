@@ -1,4 +1,4 @@
-module github.com/DamilolaAlao/golang-docker
+module main
 
 go 1.15
 
