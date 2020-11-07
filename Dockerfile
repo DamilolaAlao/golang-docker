@@ -20,7 +20,7 @@
 # ## binary exectuable!!
 # CMD ["./main"]
 
-FROM golang
+FROM golang AS builder
 WORKDIR /main
 COPY go.mod .
 COPY go.sum .
@@ -32,6 +32,6 @@ FROM alpine:latest
 RUN addgroup -S main && adduser -S main -G main
 USER main
 WORKDIR /home/main
-COPY --from=build-go /bin/main ./
+COPY --from=builder /bin/main ./
 EXPOSE 3000
 ENTRYPOINT ["./main"]
